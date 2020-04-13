@@ -8,7 +8,7 @@ namespace ExpressionInterpreter.Demo
     {
         static void Main()
         {
-            var expression = "{factor}*(3+4)+5*6";
+            var expression = "-1*({factor}*(3+4)+5*6)";
             var variableProvider = new DictionaryVariableProvider().SetValue("factor", 2);
             var expressionTree = BuildExpressionTree(expression, variableProvider);
             

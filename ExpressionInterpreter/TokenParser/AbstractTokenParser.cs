@@ -22,8 +22,8 @@ namespace ExpressionInterpreter.TokenParser
         }
 
         public static AbstractTokenParser DefaultTokenParserChain 
-            => new SingleSymbolOperationTokenParser(
+            => new LiteralTokenParser(
                 new VariableTokenParser(
-                    new LiteralTokenParser(null)));
+                    new SingleSymbolOperationTokenParser(null)));
     }
 }

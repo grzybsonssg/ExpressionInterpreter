@@ -7,18 +7,22 @@ namespace ExpressionInterpreter.TokenParser
     internal class LiteralTokenParser : AbstractTokenParser
     {
         private readonly char _decimalSeparator;
+        private readonly char _negativeSymbol;
 
-        public LiteralTokenParser(AbstractTokenParser nextTokenParser) : this(',', nextTokenParser)
+        public LiteralTokenParser(AbstractTokenParser nextTokenParser) : this(',', '-', nextTokenParser)
         { }
 
-        public LiteralTokenParser(char decimalSeparator, AbstractTokenParser nextTokenParser) : base(nextTokenParser)
+        public LiteralTokenParser(char decimalSeparator, char negativeSymbol, AbstractTokenParser nextTokenParser) : base(nextTokenParser)
         {
             this._decimalSeparator = decimalSeparator;
+            this._negativeSymbol = negativeSymbol;
         }
 
         public override IToken ParseToken(string expression, ref int currentPosition)
         {
-            if (!char.IsDigit(expression[currentPosition]))
+            var isPositiveLiteral = char.IsDigit(expression[currentPosition]);
+            var isNegativeLiteral = expression[currentPosition] == _negativeSymbol && char.IsDigit(expression[currentPosition+1]);
+            if (!isPositiveLiteral && !isNegativeLiteral)
             {
                 return base.ParseToken(expression, ref currentPosition);
             }
