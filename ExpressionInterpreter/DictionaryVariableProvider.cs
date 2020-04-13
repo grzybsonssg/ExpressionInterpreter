@@ -3,16 +3,16 @@ using ExpressionInterpreter.Interfaces;
 
 namespace ExpressionInterpreter
 {
-    public class DictionaryVariableProvider<T> : IVariableProvider<T>
+    public class DictionaryVariableProvider : IVariableProvider<double>
     {
-        private readonly Dictionary<string, T> _variables = new Dictionary<string, T>();
+        private readonly Dictionary<string, double> _numericVariables = new Dictionary<string, double>();
 
-        public DictionaryVariableProvider<T> SetValue(string name, T value)
+        public IVariableProvider<double> SetValue(string name, double value)
         {
-            _variables[name] = value;
+            _numericVariables[name] = value;
             return this;
         }
 
-        public T GetValue(string variableName) => _variables[variableName];
+        public double GetValue(string variableName) => _numericVariables[variableName];
     }
 }

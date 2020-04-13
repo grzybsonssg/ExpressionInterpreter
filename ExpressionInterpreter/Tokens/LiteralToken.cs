@@ -1,4 +1,5 @@
-﻿using ExpressionInterpreter.Interfaces;
+﻿using ExpressionInterpreter.ExpressionTreeNodes;
+using ExpressionInterpreter.Interfaces;
 
 namespace ExpressionInterpreter.Tokens
 {
@@ -10,5 +11,7 @@ namespace ExpressionInterpreter.Tokens
         {
             Value = value;
         }
+
+        public IExpressionTreeNode<T> GetExpressionTreeNode() => new LiteralTreeNode<T>(Value);
     }
 }

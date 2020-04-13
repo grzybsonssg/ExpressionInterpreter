@@ -1,4 +1,5 @@
-﻿using ExpressionInterpreter.Interfaces;
+﻿using ExpressionInterpreter.ExpressionTreeNodes;
+using ExpressionInterpreter.Interfaces;
 
 namespace ExpressionInterpreter.Tokens
 {
@@ -9,5 +10,8 @@ namespace ExpressionInterpreter.Tokens
         {
             Name = name;
         }
+
+        public VariableTreeNode<T> GetExpressionTreeNode<T>(IVariableProvider<T> variableProvider) =>
+            new VariableTreeNode<T>(Name, variableProvider);
     }
 }

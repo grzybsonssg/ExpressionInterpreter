@@ -18,10 +18,10 @@ namespace ExpressionInterpreter
                 switch (token)
                 {
                     case LiteralToken<T> literalToken:
-                        resultStack.Push(new LiteralTreeNode<T>(literalToken.Value));
+                        resultStack.Push(literalToken.GetExpressionTreeNode());
                         break;
                     case VariableToken variableToken:
-                        resultStack.Push(new VariableTreeNode<T>(variableToken.Name, variableProvider));
+                        resultStack.Push(variableToken.GetExpressionTreeNode(variableProvider));
                         break;
                     case OpeningParenthesisToken openingParenthesisToken:
                         operationsStack.Push(openingParenthesisToken);
@@ -40,7 +40,7 @@ namespace ExpressionInterpreter
         }
 
         private static void HandleClosingParenthesisToken<T>(Stack<IOperationToken> operationsStack,
-            Stack<IExpressionTreeNode<T>> resultStack)
+                                                             Stack<IExpressionTreeNode<T>> resultStack)
         {
             while (operationsStack.Count > 0 && !(operationsStack.Peek() is OpeningParenthesisToken))
                 AppendOperationToResult(operationsStack, resultStack);
